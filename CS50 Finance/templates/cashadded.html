@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Cash Added!
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in stockList %}
+            <tr>
+                <td>{{ row["symbol"] }}</td>
+                <td>{{ row["stock"] }}</td>
+                <td>{{ row["shares"] }}</td>
+                <td>${{ row["price"] }}</td>
+                <td>${{ row["total"] }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>CASH</td>
+                <td><form action="/addcash" method="post">
+                    <div class="form-group">
+                        <input autocomplete="off" autofocus class="form-control" name="cash" placeholder="Add Cash" type="number" min="0.00" step="0.01">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Add</button>
+                </form></td>
+                <td colspan="2"></td>
+                <td>${{cashLeft}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td><b>${{totalVal}}</b></td>
+            </tr>
+        </tfoot>
+    </table>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Bought/Sold?</th>
+                <th>Time of Transaction</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in historyList %}
+            <tr>
+                <td>{{ row["stock"] }}</td>
+                <td>{{ row["shares"] }}</td>
+                {% if row["price"] < 0 %}
+                <td>${{ row["price"] * -1 }}</td>
+                <td>Sold</td>
+                {% else %}
+                <td>${{ row["price"] }}</td>
+                <td>Bought</td>
+                {% endif %}
+                <td>{{ row["time"] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
